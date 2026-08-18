@@ -1,9 +1,5 @@
 {
-	"useTabs": true,
-	"singleQuote": true,
-	"semi": true,
-	"trailingComma": "all",
-	"printWidth": 120,
-	"bracketSameLine": true,
-    "plugins": ["prettier-plugin-astro", "prettier-plugin-packagejson", "prettier-plugin-curly"]
+	"$schema": "https://json.schemastore.org/prettierrc",
+    "plugins": ["prettier-plugin-astro", "prettier-plugin-packagejson", "prettier-plugin-curly"],
+	"useTabs": true
 }
