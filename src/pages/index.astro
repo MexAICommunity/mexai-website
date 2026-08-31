@@ -25,7 +25,7 @@ const allies = [
 	<body>
 		<header class="site-header">
 			<a class="brand" href="#inicio" aria-label="MexAI Community, inicio"><img class="brand-logo" src="/mexai_logo.png" alt="MexAI Community" /><span><strong>MexAI</strong><small>COMMUNITY</small></span></a>
-			<nav class="desktop-nav" aria-label="Navegación principal"><a href="#comunidad">La comunidad</a><a href="#aliados">Aliados</a><a href="#agenda">Agenda</a><a href="#colabora">Colabora</a></nav>
+			<nav class="desktop-nav" aria-label="Navegación principal"><a href="#comunidad">La comunidad</a><a href="#aliados">Aliados</a><a href="#agenda">Agenda</a><a href="#propon-charla">Propón tu charla</a><a href="#colabora">Colabora</a></nav>
 			<a class="header-link" href={eventsUrl} target="_blank" rel="noreferrer">Ver próximos eventos <span aria-hidden="true">↗</span></a>
 			<MobileMenu eventsUrl={eventsUrl} client:load />
 		</header>
@@ -37,10 +37,31 @@ const allies = [
 			</section>
 			<div class="ticker" aria-label="Temas de la comunidad"><div class="ticker-track"><span>TECNOLOGIA</span><b>✦</b><span>FUTURO</span><b>✦</b><span>AI</span><b>✦</b><span>APRENDER</span><b>✦</b><span>COMPARTIR</span><b>✦</b><span>CONSTRUIR</span></div></div>
 			<section class="community section-wrap" id="comunidad">
-				<div class="section-heading"><p class="eyebrow"><span></span> Lo que hacemos</p><h2>Un espacio para<br /><em>hacerlo posible.</em></h2></div><div class="community-copy"><p>Desde Hackergarage.mx y distintas sedes aliadas, reunimos a la comunidad mexicana de IA para convertir la curiosidad en colaboración.</p><a class="text-link" href={linkedinUrl} target="_blank" rel="noreferrer">Síguenos en LinkedIn <span aria-hidden="true">↗</span></a></div><div class="values-grid"><article><span class="value-number">01</span><h3>Meetups<br />mensuales</h3><p>Charlas y conversaciones que aterrizan la IA en el mundo real.</p></article><article><span class="value-number">02</span><h3>Talleres<br />prácticos</h3><p>Aprende haciendo, con herramientas y proyectos compartidos.</p></article><article><span class="value-number">03</span><h3>Red de<br />colaboración</h3><p>Conecta con personas e instituciones que mueven el ecosistema.</p></article></div></section>
+				<div class="section-heading"><p class="eyebrow"><span></span> Lo que hacemos</p><h2>Un espacio para<br /><em>hacerlo posible.</em></h2></div><div class="community-copy"><p>Desde Hackergarage.mx y distintas sedes aliadas, reunimos a la comunidad mexicana de IA para convertir la curiosidad en colaboración.</p><a class="text-link" href={linkedinUrl} target="_blank" rel="noreferrer">Síguenos en LinkedIn <span aria-hidden="true">↗</span></a></div><div class="values-grid"><article><span class="value-number">01</span><h3>Meetups<br />mensuales</h3><p>Charlas y conversaciones que aterrizan la IA en el mundo real.</p></article><article><span class="value-number">02</span><h3>Talleres<br />prácticos</h3><p>Aprende haciendo, con herramientas y proyectos compartidos.</p></article><article><span class="value-number">03</span><h3>Red de<br />colaboración</h3><p>Conecta con personas e instituciones que mueven el ecosistema.</p></article></div>
+			</section>
+			
+			<section class="propose section-wrap" id="propon-charla">
+				<div class="propose-heading"><p class="eyebrow"><span></span> Comparte tu conocimiento</p><h2>Propón tu<br /><em>próxima charla.</em></h2><p>¿Tienes un proyecto, investigación o experiencia con IA que valga la pena compartir? Cuéntanos de qué se trata y te contactaremos para agendarla en un próximo meetup.</p></div>
+				<form class="propose-form" name="talk-proposal" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/gracias">
+					<input type="hidden" name="form-name" value="talk-proposal" />
+					<p class="propose-hidden"><label>No llenes esto si eres humano: <input name="bot-field" /></label></p>
+					<div class="propose-grid">
+						<label>Nombre completo<input type="text" name="nombre" autocomplete="name" required /></label>
+						<label>Correo electrónico<input type="email" name="email" autocomplete="email" required /></label>
+						<label>Título de la charla<input type="text" name="titulo" required /></label>
+						<label>Nivel<select name="nivel" required><option value="">Selecciona una opción</option><option value="Introductorio">Introductorio</option><option value="Intermedio">Intermedio</option><option value="Avanzado">Avanzado</option></select></label>
+						<label class="propose-full">Descripción de la charla<textarea name="descripcion" rows="4" required></textarea></label>
+						<label class="propose-full">Enlaces (LinkedIn, portafolio, charlas previas)<input type="url" name="enlaces" placeholder="https://" /></label>
+					</div>
+					<button class="button button-primary" type="submit">Enviar propuesta <span aria-hidden="true">↗</span></button>
+				</form>
+			</section>
 			<section class="allies section-wrap" id="aliados">
-				<div class="allies-heading"><p class="eyebrow"><span></span> Nuestro ecosistema</p><h2>Crecer es<br /><em>conectar.</em></h2><p>Construimos comunidad junto a organizaciones que abren espacios, comparten conocimiento y fortalecen la innovación en Jalisco.</p></div><div class="allies-grid">{allies.map((ally, index) => <a class="ally-card" href={ally.url} target="_blank" rel="noreferrer"><span class="ally-index">0{index + 1}</span><span class="ally-name">{ally.name}</span><span class="ally-tag">{ally.tag}</span><span class="ally-arrow" aria-hidden="true">↗</span></a>)}</div></section>
-			<section class="agenda section-wrap" id="agenda"><div><p class="eyebrow"><span></span> Próximo paso</p><h2>Tu próxima<br /><em>conexión está aquí.</em></h2></div><div class="agenda-card"><span class="card-kicker">AGENDA ABIERTA</span><strong>Eventos, talleres<br />y comunidad</strong><p>Descubre cuándo y dónde nos reunimos.</p><a class="button button-dark" href={eventsUrl} target="_blank" rel="noreferrer">Explorar Eventbrite <span aria-hidden="true">↗</span></a></div></section>
+				<div class="allies-heading"><p class="eyebrow"><span></span> Nuestro ecosistema</p><h2>Crecer es<br /><em>conectar.</em></h2><p>Construimos comunidad junto a organizaciones que abren espacios, comparten conocimiento y fortalecen la innovación en Jalisco.</p></div><div class="allies-grid">{allies.map((ally, index) => <a class="ally-card" href={ally.url} target="_blank" rel="noreferrer"><span class="ally-index">0{index + 1}</span><span class="ally-name">{ally.name}</span><span class="ally-tag">{ally.tag}</span><span class="ally-arrow" aria-hidden="true">↗</span></a>)}</div>
+			</section>
+			<section class="agenda section-wrap" id="agenda">
+				<div><p class="eyebrow"><span></span> Próximo paso</p><h2>Tu próxima<br /><em>conexión está aquí.</em></h2></div><div class="agenda-card"><span class="card-kicker">AGENDA ABIERTA</span><strong>Eventos, talleres<br />y comunidad</strong><p>Descubre cuándo y dónde nos reunimos.</p><a class="button button-dark" href={eventsUrl} target="_blank" rel="noreferrer">Explorar Eventbrite <span aria-hidden="true">↗</span></a></div>
+			</section>
 		</main>
 		<footer class="site-footer section-wrap" id="colabora">
 			<a class="brand" href="#inicio">
