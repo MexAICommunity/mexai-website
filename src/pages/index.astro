@@ -3,7 +3,7 @@ import MobileMenu from '../components/MobileMenu';
 import '../styles/global.css';
 
 const eventsUrl = 'https://www.eventbrite.com.mx/o/mexai-comunidad-de-ia-106303535081';
-const linkedinUrl = 'https://www.linkedin.com/company/mexai-community';
+const linkedinUrl = 'https://www.linkedin.com/company/mexai-community/home/?viewAsMember=true';
 const allies = [
 	{ name: 'HackerGarage', url: 'https://hackergarage.mx', tag: 'Sede y comunidad' },
 	{ name: 'Ciudad Creativa Digital', url: 'https://ciudadcreativadigital.mx', tag: 'Ecosistema creativo' },
@@ -27,7 +27,7 @@ const allies = [
 	<body>
 		<header class="site-header">
 			<a class="brand" href="#inicio" aria-label="Comunidad de IA de México, inicio"><img class="brand-logo" src="/mexai_logo.png" alt="Comunidad de IA de México" /><span><strong>Comunidad de IA</strong><small>De México</small></span></a>
-			<nav class="desktop-nav" aria-label="Navegación principal"><a href="#comunidad">La comunidad</a><a href="#aliados">Aliados</a><a href="#agenda">Agenda</a><a href="#propon-charla">Propón tu charla</a><a href="#colabora">Colabora</a></nav>
+			<nav class="desktop-nav" aria-label="Navegación principal"><a href="#comunidad">La comunidad</a><a href="/nosotros">Nosotros</a><a href="#aliados">Aliados</a><a href="#agenda">Agenda</a><a href="#propon-charla">Propón tu charla</a><a href="#colabora">Colabora</a></nav>
 			<a class="header-link" href={eventsUrl} target="_blank" rel="noreferrer">Ver próximos eventos <span aria-hidden="true">↗</span></a>
 			<MobileMenu eventsUrl={eventsUrl} client:load />
 		</header>
@@ -39,7 +39,7 @@ const allies = [
 			</section>
 			<div class="ticker" aria-label="Temas de la comunidad"><div class="ticker-track"><span>TECNOLOGIA</span><b>✦</b><span>FUTURO</span><b>✦</b><span>AI</span><b>✦</b><span>APRENDER</span><b>✦</b><span>COMPARTIR</span><b>✦</b><span>CONSTRUIR</span></div></div>
 			<section class="community section-wrap" id="comunidad">
-				<div class="section-heading"><p class="eyebrow"><span></span> Lo que hacemos</p><h2>Un espacio para<br /><em>hacerlo posible.</em></h2></div><div class="community-copy"><p>Desde Hackergarage.mx y distintas sedes aliadas, reunimos a la comunidad mexicana de IA para convertir la curiosidad en colaboración.</p><a class="text-link" href={linkedinUrl} target="_blank" rel="noreferrer">Síguenos en LinkedIn <span aria-hidden="true">↗</span></a></div><div class="values-grid"><article><span class="value-number">01</span><h3>Meetups<br />mensuales</h3><p>Charlas y conversaciones que aterrizan la IA en el mundo real.</p></article><article><span class="value-number">02</span><h3>Talleres<br />prácticos</h3><p>Aprende haciendo, con herramientas y proyectos compartidos.</p></article><article><span class="value-number">03</span><h3>Red de<br />colaboración</h3><p>Conecta con personas e instituciones que mueven el ecosistema.</p></article></div>
+				<div class="section-heading"><p class="eyebrow"><span></span> Lo que hacemos</p><h2>Un espacio para<br /><em>hacerlo posible.</em></h2></div><div class="community-copy"><p>Desde Hackergarage.mx y distintas sedes aliadas, reunimos a la comunidad mexicana de IA para convertir la curiosidad en colaboración.</p><a class="text-link" href="/nosotros">Conoce nuestra visión <span aria-hidden="true">→</span></a></div><div class="values-grid"><article><span class="value-number">01</span><h3>Meetups<br />mensuales</h3><p>Charlas y conversaciones que aterrizan la IA en el mundo real.</p></article><article><span class="value-number">02</span><h3>Talleres<br />prácticos</h3><p>Aprende haciendo, con herramientas y proyectos compartidos.</p></article><article><span class="value-number">03</span><h3>Red de<br />colaboración</h3><p>Conecta con personas e instituciones que mueven el ecosistema.</p></article></div>
 			</section>
 			
 			<section class="propose section-wrap" id="propon-charla">
@@ -73,6 +73,6 @@ const allies = [
 			<p>La IA que construimos juntos<br />
 				<strong>transforma lo que viene.</strong>
 			</p>
-			<div><a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={eventsUrl} target="_blank" rel="noreferrer">Eventbrite ↗</a></div></footer>
+			<div><a href="/nosotros">Nosotros</a><a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={eventsUrl} target="_blank" rel="noreferrer">Eventbrite ↗</a></div></footer>
 	</body>
 </html>
