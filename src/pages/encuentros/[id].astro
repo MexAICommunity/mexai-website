@@ -31,6 +31,13 @@ const { Content } = await render(event);
 	.event-detail { margin-top: 32px; }
 	.event-detail p { color: var(--muted); }
 	.event-recap { max-width: 70ch; margin-block: 24px; line-height: 1.6; }
+	.event-recap :global(h2) { margin-block: 28px 10px; font-size: 24px; font-weight: 700; }
+	.event-recap :global(h3) { margin-block: 20px 8px; font-size: 18px; font-weight: 700; }
+	.event-recap :global(p),
+	.event-recap :global(ul),
+	.event-recap :global(ol) { margin-block: 0 14px; }
+	.event-recap :global(ul) { padding-inline-start: 1.5em; list-style: disc; }
+	.event-recap :global(ol) { padding-inline-start: 1.5em; list-style: decimal; }
 	.event-recap :global(a) { text-decoration: underline; }
 	.event-recap :global(img) { max-width: 100%; height: auto; }
 </style>
