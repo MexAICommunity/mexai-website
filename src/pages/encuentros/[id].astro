@@ -1,0 +1,36 @@
+---
+import { render } from 'astro:content';
+import EventPage from '../../components/EventPage.astro';
+import { eventDate, eventTitle, getEvents, type Event } from '../../lib/events';
+
+export async function getStaticPaths() {
+	const events = await getEvents('past');
+	return events.map((event) => ({ params: { id: event.id }, props: { event } }));
+}
+
+const { event } = Astro.props as { event: Event };
+const title = eventTitle(event);
+const { Content } = await render(event);
+---
+
+<EventPage title={title}>
+	<a class="text-link" href="/encuentros/">← Encuentros anteriores</a>
+	<article class="event-detail">
+		<h1>{title}</h1>
+		<p>
+			<time datetime={event.data.eventbrite.startsAt}>{eventDate(event)}</time>
+			{event.data.eventbrite.venue && <span> · {event.data.eventbrite.venue}</span>}
+		</p>
+		{event.data.summary && <p>{event.data.summary}</p>}
+		<div class="event-recap"><Content /></div>
+		<a class="text-link" href={event.data.eventbrite.url} target="_blank" rel="noreferrer">Ver publicación en Eventbrite <span aria-hidden="true">↗</span></a>
+	</article>
+</EventPage>
+
+<style>
+	.event-detail { margin-top: 32px; }
+	.event-detail p { color: var(--muted); }
+	.event-recap { max-width: 70ch; margin-block: 24px; line-height: 1.6; }
+	.event-recap :global(a) { text-decoration: underline; }
+	.event-recap :global(img) { max-width: 100%; height: auto; }
+</style>

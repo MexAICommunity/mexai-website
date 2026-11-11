@@ -1,0 +1,30 @@
+---
+import EventPage from '../../components/EventPage.astro';
+import { eventDate, eventTitle, getEvents } from '../../lib/events';
+
+const events = await getEvents('past');
+---
+
+<EventPage title="Encuentros anteriores">
+	<h1>Encuentros anteriores</h1>
+	{events.length ? (
+		<ul class="event-list">
+			{events.map((event) => (
+				<li>
+					<time class="card-kicker" datetime={event.data.eventbrite.startsAt}>{eventDate(event, false)}</time>
+					<h2><a href={`/encuentros/${event.id}/`}>{eventTitle(event)}</a></h2>
+					{event.data.eventbrite.venue && <p>{event.data.eventbrite.venue}</p>}
+					{event.data.summary && <p>{event.data.summary}</p>}
+				</li>
+			))}
+		</ul>
+	) : <p>Aún no hay encuentros en el archivo.</p>}
+</EventPage>
+
+<style>
+	.event-list { list-style: none; padding: 0; margin: 42px 0 0; }
+	.event-list li { border-top: 1px solid rgb(16 44 59 / 22%); padding-block: 24px; }
+	.event-list h2 { margin: 8px 0; font-size: clamp(22px, 3vw, 32px); line-height: 1.1; }
+	.event-list h2 a:hover { text-decoration: underline; }
+	.event-list p { margin: 4px 0; color: var(--muted); }
+</style>
