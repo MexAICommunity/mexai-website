@@ -1,6 +1,6 @@
 ---
-title: "Primer encuentro de la comunidad de IA"
-summary: "El comienzo de MexAI en Guadalajara."
+title: "Posada 2024 y primer encuentro de la comunidad de IA"
+summary: "El primer encuentro de MexAI en la posada de HackerGarage."
 historical:
   date: "2024-12"
   venue: "HackerGarage"
@@ -17,4 +17,16 @@ gallery:
     alt: "Vista de la sala desde las mesas de HackerGarage"
 ---
 
-Nuestro primer encuentro reunió a la comunidad en HackerGarage. La sesión incluyó la presentación «How to teach new things to my AI?».
+*Texto de la publicación original de HackerGarage.*
+
+🎄✨ ¡Así se vivió nuestra posada en HackerGarage! ✨🎄
+
+Queremos agradecer de corazón a cada persona que forma parte de las comunidades que dan vida a este espacio. Gracias a ustedes, HackerGarage no solo existe, sino que se convierte en un lugar lleno de aprendizaje, colaboración y buenos momentos.
+
+La posada fue un evento muy especial, lleno de alegría, unión y el espíritu que nos caracteriza. ¡Gracias por acompañarnos y hacerla tan bonita!
+
+Un agradecimiento especial a Eduardo ([@salazareduardo21](https://www.instagram.com/salazareduardo21/)) por capturar estos momentos increíbles con su talento y cámara. 🙌📸
+
+Esperamos que este año que comienza sea aún mejor, lleno de nuevos proyectos, ideas, y muchas más experiencias compartidas. 💡🚀
+
+[#hackergarage](https://www.instagram.com/explore/tags/hackergarage/) [#comunidad](https://www.instagram.com/explore/tags/comunidad/) [#posada2024](https://www.instagram.com/explore/tags/posada2024/)
