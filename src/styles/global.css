@@ -55,5 +55,4 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 1120px) {
 	.desktop-nav { gap: 16px; margin-left: 20px; font-size: 12px; }
 	.desktop-nav a { white-space: nowrap; }
-	.header-link { display: none; }
 }

@@ -1,5 +1,5 @@
 ---
-import MobileMenu from '../components/MobileMenu';
+import SiteHeader from '../components/SiteHeader.astro';
 import '../styles/global.css';
 
 const eventsUrl = 'https://www.eventbrite.com.mx/o/mexai-comunidad-de-ia-106303535081';
@@ -17,12 +17,7 @@ const linkedinUrl = 'https://www.linkedin.com/company/mexai-community/home/?view
 		<title>Nosotros | Comunidad de IA de México</title>
 	</head>
 	<body>
-		<header class="site-header">
-			<a class="brand" href="/" aria-label="Comunidad de IA de México, inicio"><img class="brand-logo" src="/mexai_logo.png" alt="Comunidad de IA de México" /><span><strong>Comunidad de IA</strong><small>De México</small></span></a>
-			<nav class="desktop-nav" aria-label="Navegación principal"><a href="/#comunidad">La comunidad</a><a href="/nosotros">Nosotros</a><a href="/#aliados">Aliados</a><a href="/#agenda">Agenda</a><a href="/#propon-charla">Propón tu charla</a><a href="/#colabora">Colabora</a></nav>
-			<a class="header-link" href={eventsUrl} target="_blank" rel="noreferrer">Ver próximos eventos <span aria-hidden="true">↗</span></a>
-			<MobileMenu eventsUrl={eventsUrl} client:load />
-		</header>
+		<SiteHeader />
 
 		<main>
 			<section class="about-hero section-wrap">
