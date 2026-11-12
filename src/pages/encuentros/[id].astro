@@ -1,0 +1,67 @@
+---
+import { render } from 'astro:content';
+import EventPage from '../../components/EventPage.astro';
+import { eventDate, eventStart, eventTitle, eventVenue, getEvents, type Event } from '../../lib/events';
+
+export async function getStaticPaths() {
+	const events = await getEvents('past');
+	return events.map((event) => ({ params: { id: event.id }, props: { event } }));
+}
+
+const { event } = Astro.props as { event: Event };
+const title = eventTitle(event);
+const venue = eventVenue(event);
+const { hero, gallery, source, eventbrite } = event.data;
+const { Content } = await render(event);
+---
+
+<EventPage title={title}>
+	<a class="text-link" href="/encuentros/">← Encuentros anteriores</a>
+	<article class="event-detail">
+		<h1>{title}</h1>
+		<p>
+			<time datetime={eventStart(event)}>{eventDate(event)}</time>
+			{venue && <span> · {venue}</span>}
+		</p>
+		{event.data.summary && <p>{event.data.summary}</p>}
+		{hero && <img class="event-hero" src={hero.src} alt={hero.alt} fetchpriority="high" />}
+		<div class="event-recap"><Content /></div>
+		{gallery && gallery.length > 0 && (
+			<section class="event-gallery" aria-labelledby="event-gallery-heading">
+				<h2 id="event-gallery-heading">Galería</h2>
+				<ul>
+					{gallery.map((photo) => (
+						<li><a href={photo.src}><img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" /></a></li>
+					))}
+				</ul>
+			</section>
+		)}
+		{source && <p><a class="text-link" href={source.url} target="_blank" rel="noreferrer">{source.label} <span aria-hidden="true">↗</span></a></p>}
+		{eventbrite && eventbrite.phase !== 'hidden' && <p><a class="text-link" href={eventbrite.url} target="_blank" rel="noreferrer">Ver publicación en Eventbrite <span aria-hidden="true">↗</span></a></p>}
+	</article>
+</EventPage>
+
+<style>
+	.event-detail { margin-top: 32px; }
+	.event-detail p { color: var(--muted); }
+	.event-hero { display: block; max-width: 100%; max-height: min(66vh, 680px); width: auto; height: auto; margin-block: 24px; }
+	.event-gallery { margin-block: 28px; }
+	.event-gallery h2 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+	.event-gallery ul {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+		gap: 12px;
+		max-width: 960px;
+	}
+	.event-gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+	.event-recap { max-width: 70ch; margin-block: 24px; line-height: 1.6; }
+	.event-recap :global(h2) { margin-block: 28px 10px; font-size: 24px; font-weight: 700; }
+	.event-recap :global(h3) { margin-block: 20px 8px; font-size: 18px; font-weight: 700; }
+	.event-recap :global(p),
+	.event-recap :global(ul),
+	.event-recap :global(ol) { margin-block: 0 14px; }
+	.event-recap :global(ul) { padding-inline-start: 1.5em; list-style: disc; }
+	.event-recap :global(ol) { padding-inline-start: 1.5em; list-style: decimal; }
+	.event-recap :global(a) { text-decoration: underline; }
+	.event-recap :global(img) { max-width: 100%; height: auto; }
+</style>

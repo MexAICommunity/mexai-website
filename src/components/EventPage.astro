@@ -1,0 +1,39 @@
+---
+import '../styles/global.css';
+
+const { title } = Astro.props;
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<title>{title} | MexAI Community</title>
+	</head>
+	<body>
+		<header class="site-header">
+			<a class="brand" href="/" aria-label="MexAI Community, inicio">
+				<img class="brand-logo" src="/mexai_logo.png" alt="" />
+				<span><strong>MexAI</strong><small>COMMUNITY</small></span>
+			</a>
+			<a class="text-link" href="/#agenda">Agenda</a>
+		</header>
+		<main class="section-wrap event-page">
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style>
+	.event-page { padding-block: clamp(40px, 8vw, 110px); }
+	.event-page :global(h1) {
+		max-width: 24ch;
+		margin: 0 0 20px;
+		font-size: clamp(36px, 6vw, 72px);
+		line-height: 1;
+		letter-spacing: -0.04em;
+	}
+</style>
