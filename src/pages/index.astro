@@ -1,6 +1,6 @@
 ---
 import MobileMenu from '../components/MobileMenu';
-import { eventDate, eventTitle, getEvents } from '../lib/events';
+import { eventDate, eventStart, eventTitle, eventVenue, getEvents } from '../lib/events';
 import '../styles/global.css';
 
 const eventsUrl = 'https://www.eventbrite.com.mx/o/mexai-comunidad-de-ia-106303535081';
@@ -71,10 +71,10 @@ const allies = [
 				<div class="agenda-events">
 					{upcomingEvents.length ? upcomingEvents.map((event) => (
 						<article class="agenda-card">
-							<time class="card-kicker" datetime={event.data.eventbrite.startsAt}>{eventDate(event)}</time>
+							<time class="card-kicker" datetime={eventStart(event)}>{eventDate(event)}</time>
 							<h3>{eventTitle(event)}</h3>
-							{event.data.eventbrite.venue && <p>{event.data.eventbrite.venue}</p>}
-							<a class="button button-dark" href={event.data.eventbrite.url} target="_blank" rel="noreferrer">Inscribirme en Eventbrite <span aria-hidden="true">↗</span></a>
+							{eventVenue(event) && <p>{eventVenue(event)}</p>}
+							<a class="button button-dark" href={event.data.eventbrite?.url ?? eventsUrl} target="_blank" rel="noreferrer">Inscribirme en Eventbrite <span aria-hidden="true">↗</span></a>
 						</article>
 					)) : (
 						<div class="agenda-card">

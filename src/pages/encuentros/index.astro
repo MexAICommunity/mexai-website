@@ -1,6 +1,6 @@
 ---
 import EventPage from '../../components/EventPage.astro';
-import { eventDate, eventTitle, getEvents } from '../../lib/events';
+import { eventDate, eventStart, eventTitle, eventVenue, getEvents } from '../../lib/events';
 
 const events = await getEvents('past');
 ---
@@ -11,10 +11,15 @@ const events = await getEvents('past');
 		<ul class="event-list">
 			{events.map((event) => (
 				<li>
-					<time class="card-kicker" datetime={event.data.eventbrite.startsAt}>{eventDate(event, false)}</time>
-					<h2><a href={`/encuentros/${event.id}/`}>{eventTitle(event)}</a></h2>
-					{event.data.eventbrite.venue && <p>{event.data.eventbrite.venue}</p>}
-					{event.data.summary && <p>{event.data.summary}</p>}
+					{event.data.hero && (
+						<img class="event-thumbnail" src={event.data.hero.src} alt={event.data.hero.alt} loading="lazy" decoding="async" />
+					)}
+					<div>
+						<time class="card-kicker" datetime={eventStart(event)}>{eventDate(event, false)}</time>
+						<h2><a href={ '/encuentros/' + event.id + '/' }>{eventTitle(event)}</a></h2>
+						{eventVenue(event) && <p>{eventVenue(event)}</p>}
+						{event.data.summary && <p>{event.data.summary}</p>}
+					</div>
 				</li>
 			))}
 		</ul>
@@ -23,8 +28,21 @@ const events = await getEvents('past');
 
 <style>
 	.event-list { list-style: none; padding: 0; margin: 42px 0 0; }
-	.event-list li { border-top: 1px solid rgb(16 44 59 / 22%); padding-block: 24px; }
+	.event-list li {
+		display: flex;
+		gap: 24px;
+		align-items: start;
+		border-top: 1px solid rgb(16 44 59 / 22%);
+		padding-block: 24px;
+	}
+	.event-thumbnail {
+		width: clamp(100px, 23vw, 185px);
+		flex: none;
+		aspect-ratio: 3 / 2;
+		object-fit: cover;
+	}
 	.event-list h2 { margin: 8px 0; font-size: clamp(22px, 3vw, 32px); line-height: 1.1; }
 	.event-list h2 a:hover { text-decoration: underline; }
 	.event-list p { margin: 4px 0; color: var(--muted); }
+	@media (max-width: 520px) { .event-list li { gap: 14px; } }
 </style>

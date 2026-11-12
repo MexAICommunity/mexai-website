@@ -82,6 +82,14 @@ function publicEventData(event, now) {
 	};
 }
 
+function localDate(event) {
+	const parts = new Intl.DateTimeFormat('en', {
+		timeZone: event.timezone, year: 'numeric', month: '2-digit', day: '2-digit',
+	}).formatToParts(new Date(event.startsAt));
+	const fields = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+	return fields.year + '-' + fields.month + '-' + fields.day;
+}
+
 function managedBlock(eventbrite, newline) {
 	const yaml = dump({ eventbrite }, { lineWidth: -1, forceQuotes: true, quotingType: "'" }).trimEnd();
 	return [startMarker, yaml, endMarker].join('\n').replaceAll('\n', newline);
@@ -103,13 +111,22 @@ async function sync() {
 	await mkdir(directory, { recursive: true });
 	const files = (await readdir(directory)).filter((name) => name.endsWith('.md'));
 	const seenIds = new Set();
+	const historicalMatches = new Map();
 	for (const name of files) {
 		const file = new URL(encodeURIComponent(name), directory);
 		const source = await readFile(file, 'utf8');
 		const frontmatter = source.match(frontmatterPattern);
 		if (frontmatter?.index !== 0) throw new Error('Expected frontmatter in ' + name);
 
-		const existing = load(frontmatter[1], { schema: JSON_SCHEMA })?.eventbrite;
+		const { eventbrite: existing, historical } = load(frontmatter[1], { schema: JSON_SCHEMA }) ?? {};
+		if (!existing && historical) {
+			if (historical.matchEventbrite && /^\d{4}-\d{2}-\d{2}$/.test(historical.date)) {
+				const matches = historicalMatches.get(historical.date) ?? [];
+				matches.push({ file, source, closing: frontmatter[0].lastIndexOf('---') });
+				historicalMatches.set(historical.date, matches);
+			}
+			continue;
+		}
 		if (!existing?.id || seenIds.has(existing.id)) {
 			throw new Error('Missing or duplicate Eventbrite ID in ' + name);
 		}
@@ -126,6 +143,26 @@ async function sync() {
 		pending.delete(existing.id);
 		const updated = source.slice(0, start) + managedBlock(data, newline) + source.slice(end + endMarker.length);
 		if (updated !== source) writes.set(file, updated);
+	}
+
+	const pastByDate = new Map();
+	for (const data of pending.values()) {
+		if (data.phase !== 'past') continue;
+		const date = localDate(data);
+		const matches = pastByDate.get(date) ?? [];
+		matches.push(data);
+		pastByDate.set(date, matches);
+	}
+
+	for (const [date, posts] of historicalMatches) {
+		const matches = pastByDate.get(date);
+		if (posts.length !== 1 || matches?.length !== 1) continue;
+		const [{ file, source, closing }] = posts;
+		const [data] = matches;
+		const newline = source.slice(0, closing).includes('\r\n') ? '\r\n' : '\n';
+		const block = managedBlock(data, newline);
+		writes.set(file, source.slice(0, closing) + block + newline + source.slice(closing));
+		pending.delete(data.id);
 	}
 
 	for (const [id, data] of pending) {

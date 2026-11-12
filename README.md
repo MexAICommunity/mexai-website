@@ -51,6 +51,14 @@ reseña, las fotos y los enlaces a recursos debajo del frontmatter. El script
 actualiza el bloque entre los comentarios de Eventbrite y conserva el resto
 del archivo. Mantén los comentarios y el ID al editar.
 
+Para un encuentro histórico, usa `historical.date` (`AAAA-MM-DD` o `AAAA-MM`)
+y un `title`. Puedes añadir `historical.venue`, `hero` y `gallery`. Cada foto
+lleva `src` (archivo bajo `/encuentros/fotos/` o portada de Eventbrite) y `alt`
+(descripción breve).
+Con `historical.matchEventbrite: true`, la primera sincronización añade el
+registro de Eventbrite si hay una coincidencia única por fecha local. Las
+reseñas históricas siguen en el archivo aunque se retire el registro de Eventbrite.
+
 Configura la integración en **Settings → Secrets and variables → Actions**:
 
 1. Agrega `EVENTBRITE_TOKEN` como secreto del repositorio, con un token privado
