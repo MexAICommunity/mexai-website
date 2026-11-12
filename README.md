@@ -44,8 +44,9 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 
 ## Agenda y archivo de encuentros
 
-La portada y el archivo en `/encuentros/` leen la colección de Astro en
-`src/content/encuentros/`. Cada archivo contiene los datos públicos de un evento.
+La portada y la página `/encuentros/` (próximos encuentros y archivo) leen la
+colección de Astro en `src/content/encuentros/`. Cada archivo contiene los datos
+públicos de un evento.
 Puedes editar `title` y `summary` arriba del bloque de Eventbrite y escribir la
 reseña, las fotos y los enlaces a recursos debajo del frontmatter. El script
 actualiza el bloque entre los comentarios de Eventbrite y conserva el resto

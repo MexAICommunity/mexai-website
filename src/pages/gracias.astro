@@ -1,8 +1,6 @@
 ---
 import '../styles/global.css';
-import MobileMenu from '../components/MobileMenu';
-
-const eventsUrl = 'https://www.eventbrite.com.mx/o/mexai-comunidad-de-ia-106303535081';
+import SiteHeader from '../components/SiteHeader.astro';
 ---
 
 <html lang="es">
@@ -16,12 +14,7 @@ const eventsUrl = 'https://www.eventbrite.com.mx/o/mexai-comunidad-de-ia-1063035
 		<title>Gracias | Comunidad de IA de México</title>
 	</head>
 	<body>
-        <header class="site-header">
-			<a class="brand" href="/" aria-label="Comunidad de IA de México, inicio"><img class="brand-logo" src="/mexai_logo.png" alt="Comunidad de IA de México" /><span><strong>Comunidad de IA</strong><small>De México</small></span></a>
-			<nav class="desktop-nav" aria-label="Navegación principal"><a href="/#comunidad">La comunidad</a><a href="/nosotros">Nosotros</a><a href="/#aliados">Aliados</a><a href="/#agenda">Agenda</a><a href="/#propon-charla">Propón tu charla</a><a href="/#colabora">Colabora</a></nav>
-			<a class="header-link" href={eventsUrl} target="_blank" rel="noreferrer">Ver próximos eventos <span aria-hidden="true">↗</span></a>
-			<MobileMenu eventsUrl={eventsUrl} client:load />
-		</header>
+		<SiteHeader />
 		<main class="section-wrap thanks-page">
 			<p class="eyebrow"><span></span> Propuesta recibida</p>
 			<h1>¡Gracias por<br /><em>proponer tu charla!</em></h1>

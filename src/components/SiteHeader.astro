@@ -1,0 +1,12 @@
+---
+import MobileMenu from './MobileMenu';
+
+const eventsUrl = 'https://www.eventbrite.com.mx/o/mexai-comunidad-de-ia-106303535081';
+---
+
+<header class="site-header">
+	<a class="brand" href="/" aria-label="Comunidad de IA de México, inicio"><img class="brand-logo" src="/mexai_logo.png" alt="Comunidad de IA de México" /><span><strong>Comunidad de IA</strong><small>De México</small></span></a>
+	<nav class="desktop-nav" aria-label="Navegación principal"><a href="/encuentros/">Encuentros</a><a href="/nosotros">Nosotros</a><a href="/#propon-charla">Propón tu charla</a></nav>
+	<a class="header-link" href={eventsUrl} target="_blank" rel="noreferrer">Ver próximos eventos <span aria-hidden="true">↗</span></a>
+	<MobileMenu eventsUrl={eventsUrl} client:load />
+</header>
